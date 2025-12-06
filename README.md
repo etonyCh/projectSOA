@@ -129,14 +129,6 @@ http://localhost:9090/ws/biblio?wsdl
 
 Utilisez `SoapUI` ou un client JAX-WS pour tester les opérations administratives.
 
----
-
-## Notes de développement & sécurité
-
-- Mot de passe : le projet contient des points où des mots de passe sont stockés en clair. Une dépendance `org.mindrot:jbcrypt` est présente dans le `pom.xml` pour faciliter le hachage.
-- Migration recommandée : utiliser BCrypt pour hacher les mots de passe (`BCrypt.hashpw`) et vérifier via `BCrypt.checkpw`. Une migration transparente peut être implémentée côté `Database.checkLogin` : tenter d'abord `checkpw`, si l'entrée ressemble à un mot de passe en clair et le compare correctement, re-hasher et sauvegarder la valeur.
-
----
 
 ## Tests
 
@@ -156,7 +148,7 @@ Contributions bienvenues : ouvrez une issue ou un pull request. Pour les modific
 
 ## Licence
 
-Ce projet est fourni à des fins pédagogiques. Ajoutez ici la licence désirée (MIT, Apache-2.0, etc.).
+Ce projet est fourni à des fins pédagogiques.FSS
 
 ---
 
