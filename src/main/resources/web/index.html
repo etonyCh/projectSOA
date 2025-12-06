@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | Bibliothèque</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <script>
+        // Auth Check
+        (function(){
+            try {
+                if(!localStorage.getItem('userId')) window.location.href = 'login.html';
+            } catch(e) { window.location.href = 'login.html'; }
+        })();
+    </script>
+
+    <!-- Header -->
+    <header class="app-header">
+        <div class="brand">
+            <span>📚</span> BiblioTech
+        </div>
+        <div class="user-info">
+            <span id="welcome-msg" class="welcome-text">Bonjour, Étudiant</span>
+            <button onclick="logout()" class="btn btn-outline" style="padding: 0.4rem 1rem; font-size: 0.8rem;">Déconnexion</button>
+        </div>
+    </header>
+
+    <!-- Main Dashboard Layout -->
+    <div class="main-content">
+        
+        <!-- Sidebar: Emprunts & Status -->
+        <aside class="sidebar">
+            <!-- Emprunts Card -->
+            <div class="card">
+                <div class="card-header">
+                    <h2>📖 Mes Emprunts</h2>
+                    <span id="emprunt-count" style="background: var(--primary); color: white; padding: 0.2rem 0.6rem; border-radius: 1rem; font-size: 0.8rem;">0</span>
+                </div>
+                <div id="emprunts-list" class="emprunt-list">
+                    <!-- Items injected by JS -->
+                    <div class="loading-skeleton" style="height: 60px;"></div>
+                    <div class="loading-skeleton" style="height: 60px;"></div>
+                </div>
+            </div>
+
+            <!-- Penalites Card -->
+            <div class="card" id="penalites-card" style="display: none;">
+                <div class="card-header">
+                    <h2 style="color: var(--danger)">⚠️ Pénalités</h2>
+                </div>
+                <ul id="penalites-list" style="list-style: none; padding: 0; color: var(--danger);"></ul>
+            </div>
+        </aside>
+
+        <!-- Main Catalog Section -->
+        <section class="catalog-section">
+            <div class="search-bar">
+                <span style="font-size: 1.2rem;">🔍</span>
+                <input type="text" id="search-input" placeholder="Rechercher un livre par titre, auteur..." onkeyup="handleSearch(event)">
+                <button onclick="searchLivres()" class="btn btn-primary" style="width: auto;">Rechercher</button>
+            </div>
+
+            <div id="books-grid" class="books-grid">
+                <!-- Books injected by JS -->
+                <!-- Skeletons for initial load -->
+                <div class="book-card"><div class="loading-skeleton" style="height: 200px;"></div></div>
+                <div class="book-card"><div class="loading-skeleton" style="height: 200px;"></div></div>
+                <div class="book-card"><div class="loading-skeleton" style="height: 200px;"></div></div>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- Toast Container -->
+    <div id="toast-container" class="toast-container"></div>
+
+    <script src="app.js"></script>
+</body>
+</html>
